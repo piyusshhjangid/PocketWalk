@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+  # Production build as one unit, plus a scan of the browser bundle for secrets and hard-coded dev hosts.
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            frontend/package-lock.json
+      - run: npm ci
+      - run: npm --prefix frontend ci
+      - run: npm run build:all
+      - run: npm run check:bundle
+  # Builds the image and smoke-tests it. Nothing is pushed and nothing is deployed.
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t pocketwalk-ci .
+      - name: Smoke test
+        run: |
+          docker run -d --name pw -p 3000:3000 -e TRUST_PROXY=0 -e GEMMA_PROVIDER=none -e WEATHER_PROVIDER=none pocketwalk-ci
+          for i in $(seq 1 30); do curl -fsS http://localhost:3000/ready >/dev/null 2>&1 && break; sleep 1; done
+          curl -fsS http://localhost:3000/ready
+          curl -fsS http://localhost:3000/health
+          curl -fsS http://localhost:3000/ | grep -q 'id="root"'
+          curl -fsS -X POST http://localhost:3000/walks/plan -H 'content-type: application/json' -d '{"minutes":10}' | grep -q '"plan"'
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:3000/walks/plan)" = 404
+          docker stop -t 15 pw
+          test "$(docker inspect -f '{{.State.ExitCode}}' pw)" = 0
+      - name: Container logs
+        if: always()
+        run: docker logs pw || true

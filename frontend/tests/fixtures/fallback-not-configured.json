@@ -1,0 +1,45 @@
+{
+  "status": 200,
+  "body": {
+    "plan": {
+      "title": "Easy loop near home",
+      "steps": [
+        {
+          "minutes": 8,
+          "text": "Walk out slowly on a nearby footpath."
+        },
+        {
+          "minutes": 4,
+          "text": "Pause somewhere pleasant and look around."
+        },
+        {
+          "minutes": 8,
+          "text": "Turn around and walk back."
+        }
+      ],
+      "notice": "Notice three different sounds."
+    },
+    "meta": {
+      "planner": "fallback",
+      "fallbackReason": "not_configured",
+      "fallbackSource": "deterministic",
+      "message": "No AI model is configured, so a deterministic walk was used.",
+      "validation": {
+        "parse": "not_run",
+        "schema": "not_run",
+        "business": "not_run",
+        "safety": "not_run",
+        "repaired": false,
+        "repairs": []
+      },
+      "fallbackLatencyMs": 3.47,
+      "durationMs": 4,
+      "contextLatencyMs": 0,
+      "context": {
+        "weather": "not_requested",
+        "daylight": "not_requested",
+        "guidance": []
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "status": 400,
+  "body": {
+    "error": "Invalid request: minutes must be 10, 20 or 40; energy must be easy or normal; location.city, if given, must be 2 to 80 letters."
+  }
+}

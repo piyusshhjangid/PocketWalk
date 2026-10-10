@@ -1,0 +1,81 @@
+name: Bug report
+description: Something does not work as documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. **Do not paste API keys, `.env` contents, Sentry DSNs or real locations.** Redact them.
+        Security or privacy problems (a secret, prompt or city showing up where it should not) must **not** be reported here: see SECURITY.md.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The smallest set of steps, or a curl command, that shows it.
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where does it happen?
+      options:
+        - Frontend (the app)
+        - API response (POST /walks/plan)
+        - Model output handling or fallback
+        - Safety rules (a walk rejected, or a hazard not caught)
+        - Weather / outdoor context
+        - Limits, deadline or shutdown
+        - Tracing / Sentry
+        - Build, Docker or CI
+        - Documentation
+        - Not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: planner
+    attributes:
+      label: Which walk did you get (meta.planner)?
+      options:
+        - model (Gemma)
+        - fallback
+        - not applicable or not sure
+  - type: input
+    id: provider
+    attributes:
+      label: Provider settings (GEMMA_PROVIDER and model name only, never the key)
+      placeholder: "e.g. none, or google / gemma-4-26b-a4b-it, or ollama / <model tag>"
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: |
+        OS:
+        Node.js version (node -v):
+        Browser and version (if frontend):
+        Run with: npm run dev / npm start / Docker
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output (redacted)
+      description: Error text, the JSON response, or a console message. Remove secrets and real locations first.
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I removed API keys, DSNs and real locations from everything I pasted.
+          required: true
+        - label: I searched existing issues for this problem.
+          required: false

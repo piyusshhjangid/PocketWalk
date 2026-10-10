@@ -1,0 +1,58 @@
+{
+  "status": 200,
+  "body": {
+    "plan": {
+      "title": "Slow loop, listening walk",
+      "steps": [
+        {
+          "minutes": 8,
+          "text": "Walk out slowly along the nearest footpath."
+        },
+        {
+          "minutes": 4,
+          "text": "Stop and listen for distant birds."
+        },
+        {
+          "minutes": 8,
+          "text": "Return the way you came, unhurried."
+        }
+      ],
+      "notice": "Notice how many shades of green you can find."
+    },
+    "meta": {
+      "planner": "model",
+      "provider": "google",
+      "model": "gemma-4-26b-a4b-it",
+      "modelLatencyMs": 1,
+      "validationLatencyMs": 9.2,
+      "safetyLatencyMs": 4.75,
+      "durationMs": 28,
+      "validation": {
+        "parse": "passed",
+        "schema": "passed",
+        "business": "passed",
+        "safety": "passed",
+        "repaired": false,
+        "repairs": []
+      },
+      "contextLatencyMs": 16,
+      "weatherLatencyMs": 1,
+      "context": {
+        "weather": "ok",
+        "daylight": "ok",
+        "timeOfDay": "afternoon",
+        "daylightPhase": "day",
+        "conditions": {
+          "condition": "rain",
+          "temperatureC": 18,
+          "temperatureBand": "mild",
+          "precipitation": "light",
+          "wind": "calm"
+        },
+        "guidance": [
+          "wet"
+        ]
+      }
+    }
+  }
+}

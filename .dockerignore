@@ -1,0 +1,17 @@
+# Keep the build context small and free of anything private or generated.
+.git
+.github
+**/node_modules
+**/dist
+**/coverage
+.vitest
+.env
+.env.*
+!.env.example
+*.log
+*.zip
+docs
+tests
+frontend/tests
+scripts/browser
+.DS_Store

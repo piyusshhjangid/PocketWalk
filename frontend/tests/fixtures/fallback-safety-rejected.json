@@ -1,0 +1,47 @@
+{
+  "status": 200,
+  "body": {
+    "plan": {
+      "title": "Easy loop near home",
+      "steps": [
+        {
+          "minutes": 8,
+          "text": "Walk out slowly on a nearby footpath."
+        },
+        {
+          "minutes": 4,
+          "text": "Pause somewhere pleasant and look around."
+        },
+        {
+          "minutes": 8,
+          "text": "Turn around and walk back."
+        }
+      ],
+      "notice": "Notice three different sounds."
+    },
+    "meta": {
+      "planner": "fallback",
+      "fallbackReason": "safety_violation",
+      "fallbackSource": "deterministic",
+      "message": "PocketWalk could not safely generate a plan, so a safe fallback was used.",
+      "validation": {
+        "parse": "passed",
+        "schema": "passed",
+        "business": "passed",
+        "safety": "failed",
+        "repaired": false,
+        "repairs": []
+      },
+      "validationLatencyMs": 2.77,
+      "safetyLatencyMs": 2.11,
+      "fallbackLatencyMs": 2.16,
+      "durationMs": 5,
+      "contextLatencyMs": 0,
+      "context": {
+        "weather": "not_requested",
+        "daylight": "not_requested",
+        "guidance": []
+      }
+    }
+  }
+}

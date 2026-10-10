@@ -1,0 +1,40 @@
+name: Feature request
+description: Suggest an improvement that fits PocketWalk's scope
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        PocketWalk is intentionally small. These are **out of scope**: accounts or authentication, a database or walk history, GPS or maps,
+        fitness tracking, gamification, social features, voice, notifications, Wake Lock, analytics, extra services.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Describe the problem or the person it affects, not just the solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered
+  - type: textarea
+    id: risks
+    attributes:
+      label: Effects on safety, privacy or the phone-down experience
+      description: Would this add a screen interaction during a walk, store or send data, or change a safety rule? How would it be tested?
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: This is not on the out-of-scope list above.
+          required: true
+        - label: I would be willing to help build or test it.
+          required: false

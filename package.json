@@ -1,0 +1,64 @@
+{
+  "name": "pocketwalk",
+  "version": "0.10.0",
+  "description": "One tap picks a walk length. Gemma plans a short outdoor walk. The application validates it. Then the phone goes down.",
+  "keywords": [
+    "walking",
+    "outdoors",
+    "gemma",
+    "llm",
+    "sentry",
+    "observability",
+    "express",
+    "react",
+    "typescript",
+    "hacktoberfest"
+  ],
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "smoke:gemma": "tsx scripts/smokeGemma.ts",
+    "smoke:weather": "tsx scripts/smokeWeather.ts",
+    "scenarios": "tsx scripts/scenarios.ts",
+    "scenarios:safety": "tsx scripts/safetyScenarios.ts",
+    "fixtures:frontend": "tsx scripts/captureFrontendFixtures.ts",
+    "frontend:install": "npm --prefix frontend ci",
+    "frontend:dev": "npm --prefix frontend run dev",
+    "frontend:test": "npm --prefix frontend test",
+    "frontend:typecheck": "npm --prefix frontend run typecheck",
+    "frontend:build": "npm --prefix frontend run build",
+    "qa:browser": "python3 scripts/browser/cp6_flow.py",
+    "measure:latency": "tsx scripts/measureLatency.ts",
+    "qa:browser:failures": "python3 scripts/browser/cp8_failures.py",
+    "build:all": "npm run build && npm run frontend:build",
+    "check:bundle": "tsx scripts/scanBundle.ts",
+    "qa:browser:limits": "python3 scripts/browser/cp9_limits.py",
+    "check:docs": "tsx scripts/checkDocs.ts"
+  },
+  "dependencies": {
+    "@sentry/node": "^11.4.0",
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "morgan": "^1.12.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^22.20.5",
+    "@types/supertest": "^7.2.1",
+    "supertest": "^7.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
+  }
+}
